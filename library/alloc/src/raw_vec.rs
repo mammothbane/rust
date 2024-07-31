@@ -293,16 +293,8 @@ impl<T, A: Allocator> RawVec<T, A> {
     /// `Unique::dangling()` if `capacity == 0` or `T` is zero-sized. In the former case, you must
     /// be careful.
     #[inline]
-    pub fn ptr(&self) -> *mut T {
-        self.inner.ptr()
-    }
-
-    /// Gets a const raw pointer to the start of the allocation. Note that this is
-    /// `Unique::dangling()` if `capacity == 0` or `T` is zero-sized. In the former case, you must
-    /// be careful.
-    #[inline]
-    pub const fn ptr_const(&self) -> *mut T {
-        self.ptr.as_ptr()
+    pub const fn ptr(&self) -> *mut T {
+        self.inner.as_ptr()
     }
 
     #[inline]
@@ -314,7 +306,7 @@ impl<T, A: Allocator> RawVec<T, A> {
     ///
     /// This will always be `usize::MAX` if `T` is zero-sized.
     #[inline]
-    pub fn capacity(&self) -> usize {
+    pub const fn capacity(&self) -> usize {
         self.inner.capacity(size_of::<T>())
     }
 
