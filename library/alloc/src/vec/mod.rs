@@ -946,7 +946,7 @@ impl<T, A: Allocator> Vec<T, A> {
     /// ```
     #[inline]
     #[stable(feature = "rust1", since = "1.0.0")]
-    #[rustc_const_unstable(feature = "const_vec_string_slice")]
+    #[rustc_const_unstable(feature = "const_vec_string_slice", issue = "none")]
     pub const fn capacity(&self) -> usize {
         self.buf.capacity()
     }
@@ -1254,9 +1254,9 @@ impl<T, A: Allocator> Vec<T, A> {
     /// ```
     #[inline]
     #[stable(feature = "vec_as_slice", since = "1.7.0")]
-    #[rustc_const_unstable(feature = "const_vec_string_slice")]
+    #[rustc_const_unstable(feature = "const_vec_string_slice", issue = "none")]
     pub const fn as_slice(&self) -> &[T] {
-        unsafe { slice::from_raw_parts(self.as_ptr_const(), self.len) }
+        unsafe { slice::from_raw_parts(self.as_ptr(), self.len) }
     }
 
     /// Extracts a mutable slice of the entire vector.
@@ -1328,7 +1328,7 @@ impl<T, A: Allocator> Vec<T, A> {
     /// [`as_mut_ptr`]: Vec::as_mut_ptr
     /// [`as_ptr`]: Vec::as_ptr
     #[stable(feature = "vec_as_ptr", since = "1.37.0")]
-    #[rustc_const_unstable(feature = "const_vec_string_slice")]
+    #[rustc_const_unstable(feature = "const_vec_string_slice", issue = "none")]
     #[rustc_never_returns_null_ptr]
     #[inline]
     pub const fn as_ptr(&self) -> *const T {
@@ -2265,7 +2265,7 @@ impl<T, A: Allocator> Vec<T, A> {
     /// ```
     #[inline]
     #[stable(feature = "rust1", since = "1.0.0")]
-    #[rustc_const_unstable(feature = "const_vec_string_slice")]
+    #[rustc_const_unstable(feature = "const_vec_string_slice", issue = "none")]
     #[rustc_confusables("length", "size")]
     pub const fn len(&self) -> usize {
         self.len
@@ -2283,7 +2283,7 @@ impl<T, A: Allocator> Vec<T, A> {
     /// assert!(!v.is_empty());
     /// ```
     #[stable(feature = "rust1", since = "1.0.0")]
-    #[rustc_const_unstable(feature = "const_vec_string_slice")]
+    #[rustc_const_unstable(feature = "const_vec_string_slice", issue = "none")]
     pub const fn is_empty(&self) -> bool {
         self.len() == 0
     }
