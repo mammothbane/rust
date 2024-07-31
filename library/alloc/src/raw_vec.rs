@@ -294,7 +294,7 @@ impl<T, A: Allocator> RawVec<T, A> {
     /// be careful.
     #[inline]
     pub const fn ptr(&self) -> *mut T {
-        self.inner.as_ptr()
+        self.inner.ptr()
     }
 
     #[inline]
@@ -501,8 +501,8 @@ impl<A: Allocator> RawVecInner<A> {
     }
 
     #[inline]
-    fn ptr<T>(&self) -> *mut T {
-        self.non_null::<T>().as_ptr()
+    const fn ptr<T>(&self) -> *mut T {
+        self.ptr.as_ptr() as _
     }
 
     #[inline]
@@ -511,7 +511,7 @@ impl<A: Allocator> RawVecInner<A> {
     }
 
     #[inline]
-    fn capacity(&self, elem_size: usize) -> usize {
+    const fn capacity(&self, elem_size: usize) -> usize {
         if elem_size == 0 { usize::MAX } else { self.cap.0 }
     }
 
