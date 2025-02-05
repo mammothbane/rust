@@ -1272,6 +1272,22 @@ impl From<[u8; 4]> for IpAddr {
     }
 }
 
+#[stable(feature = "ip_as_ref", since = "CURRENT_RUSTC_VERSION")]
+impl AsRef<[u8]> for IpAddr {
+    #[inline]
+    fn as_ref(&self) -> &[u8] {
+        self.as_slice()
+    }
+}
+
+#[stable(feature = "ip_as_ref", since = "CURRENT_RUSTC_VERSION")]
+impl AsRef<[u8]> for Ipv4Addr {
+    #[inline]
+    fn as_ref(&self) -> &[u8] {
+        self.as_slice()
+    }
+}
+
 impl Ipv6Addr {
     /// Creates a new IPv6 address from eight 16-bit segments.
     ///
@@ -2329,6 +2345,14 @@ impl From<[u16; 8]> for IpAddr {
     #[inline]
     fn from(segments: [u16; 8]) -> IpAddr {
         IpAddr::V6(Ipv6Addr::from(segments))
+    }
+}
+
+#[stable(feature = "ip_as_ref", since = "CURRENT_RUSTC_VERSION")]
+impl AsRef<[u8]> for Ipv6Addr {
+    #[inline]
+    fn as_ref(&self) -> &[u8] {
+        self.as_slice()
     }
 }
 
